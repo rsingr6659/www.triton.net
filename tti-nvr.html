@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Video Recorder (TTI-NVR) — Triton Technologies, Inc.</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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"/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --teal:#007B7F; --teal-dk:#005457; --teal-dp:#003638; --teal-lt:#EEF7F7;
+  --yellow:#D4A800; --yellow-lt:#fffbeb;
+  --navy:#005457; --navy-dk:#003638; --navy-md:#007B7F; --navy-lt:#EEF7F7;
+  --white:#ffffff; --off:#F5FAFA; --dark:#1A1A1A; --mid:#454545; --muted:#7A8A8A;
+  --rule:#C8D8D8; --rule-lt:#E0EEEE;
+  --sh:0 1px 8px rgba(0,54,56,.08); --sh-md:0 4px 20px rgba(0,54,56,.12);
+  --sh-lg:0 12px 40px rgba(0,54,56,.16); --sh-xl:0 24px 64px rgba(0,0,0,.18);
+  --r:8px; --r-lg:14px;
+  --font:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+}
+body{font-family:var(--font);color:var(--dark);background:var(--white);overflow-x:hidden;line-height:1.6;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--white);border-bottom:1px solid var(--rule);box-shadow:var(--sh);height:64px;}
+.nav-inner{max-width:1200px;margin:0 auto;height:100%;padding:0 32px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;cursor:pointer;text-decoration:none;}
+.nav-logo img{height:38px;display:block;}
+.nav-links{display:flex;align-items:center;gap:2px;}
+.nl{font-size:13px;font-weight:500;color:var(--mid);padding:6px 14px;border-radius:6px;cursor:pointer;transition:color .13s,background .13s;border:none;background:none;font-family:var(--font);letter-spacing:-.01em;text-decoration:none;display:inline-block;}
+.nl:hover{color:var(--navy);background:var(--navy-lt);}
+.nl.active{color:var(--navy);font-weight:600;}
+.nav-cta{margin-left:8px;background:var(--navy);color:var(--white);font-size:13px;font-weight:600;padding:8px 18px;border-radius:7px;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:7px;transition:background .13s,transform .13s;font-family:var(--font);text-decoration:none;}
+.nav-cta:hover{background:var(--navy-dk);transform:translateY(-1px);}
+
+/* ── HERO ── */
+.hero{padding:128px 0 80px;background:linear-gradient(160deg,var(--navy-dk) 0%,var(--navy) 55%,var(--teal) 100%);position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 65% 60%,rgba(212,168,0,.07) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 20% 30%,rgba(255,255,255,.03) 0%,transparent 50%);}
+.hero-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 400px;gap:80px;align-items:center;position:relative;z-index:1;}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:16px;}
+.hero h1{font-size:clamp(34px,4.5vw,54px);font-weight:800;color:var(--white);line-height:1.08;margin-bottom:18px;letter-spacing:-.03em;}
+.hero h1 strong{color:var(--yellow);font-weight:800;}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:40px;max-width:460px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px;}
+.btn-primary{background:var(--yellow);color:var(--navy-dk);font-size:14px;font-weight:700;padding:12px 24px;border-radius:8px;cursor:pointer;border:none;transition:all .14s;display:inline-flex;align-items:center;gap:8px;font-family:var(--font);text-decoration:none;}
+.btn-primary:hover{background:#e6bb00;transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,200,0,.3);}
+.btn-outline{background:transparent;color:rgba(255,255,255,.85);font-size:14px;font-weight:500;padding:12px 24px;border-radius:8px;cursor:pointer;border:1.5px solid rgba(255,255,255,.25);transition:all .14s;font-family:var(--font);display:inline-flex;align-items:center;gap:8px;text-decoration:none;}
+.btn-outline:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.4);}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;padding-top:8px;border-top:1px solid rgba(255,255,255,.1);}
+.hs .v{font-size:26px;font-weight:800;color:var(--yellow);font-family:var(--mono);line-height:1;margin-bottom:4px;}
+.hs .l{font-size:11px;color:rgba(255,255,255,.4);font-weight:500;letter-spacing:.02em;}
+
+/* NVR screen mockup */
+.nvr-device{position:relative;}
+.device-glow{position:absolute;inset:-60px;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(212,168,0,.12) 0%,transparent 65%);}
+.monitor-frame{background:#111;border-radius:12px;padding:8px;position:relative;z-index:1;box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.07);}
+.monitor-screen{border-radius:6px;overflow:hidden;background:#000;aspect-ratio:16/9;}
+.monitor-stand{width:60px;height:20px;background:#1a1a1a;margin:0 auto;border-radius:0 0 6px 6px;}
+.monitor-base{width:100px;height:6px;background:#222;margin:0 auto;border-radius:3px;}
+.cam-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#000;height:100%;}
+.cam-cell{position:relative;background:#111;overflow:hidden;}
+.cam-cell img{width:100%;height:100%;object-fit:cover;opacity:.85;}
+.cam-label{position:absolute;bottom:4px;left:5px;font-size:8px;font-weight:700;color:rgba(255,255,255,.8);font-family:var(--mono);background:rgba(0,0,0,.5);padding:1px 5px;border-radius:3px;}
+.cam-live{position:absolute;top:4px;right:5px;font-size:7px;font-weight:700;color:#4ade80;background:rgba(0,0,0,.5);padding:1px 5px;border-radius:3px;display:flex;align-items:center;gap:3px;}
+.cam-dot{width:4px;height:4px;border-radius:50%;background:#4ade80;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.nvr-bar{background:#0d1117;padding:4px 8px;display:flex;align-items:center;justify-content:space-between;border-radius:0 0 6px 6px;}
+.nvr-bar span{font-size:8px;color:rgba(255,255,255,.4);font-family:var(--mono);}
+.nvr-bar-status{display:flex;align-items:center;gap:6px;}
+.nvr-bar-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;}
+
+/* ── LAYOUT ── */
+.section{padding:88px 0;}
+.section-alt{background:var(--off);}
+.section-navy{background:linear-gradient(160deg,var(--navy-dk) 0%,#004a4e 100%);}
+.container{max-width:1200px;margin:0 auto;padding:0 32px;}
+.anchor{display:block;height:64px;margin-top:-64px;visibility:hidden;}
+.sec-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;display:block;}
+.sec-eyebrow.lt{color:var(--yellow);}
+h2.sec-title{font-size:clamp(24px,3.2vw,38px);font-weight:800;color:var(--navy-dk);line-height:1.15;margin-bottom:12px;letter-spacing:-.025em;}
+h2.sec-title.lt{color:var(--white);}
+.sec-desc{font-size:15px;color:var(--muted);line-height:1.72;max-width:540px;}
+.sec-desc.lt{color:rgba(255,255,255,.5);}
+
+/* ── FEATURES ── */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+.fc{background:var(--white);border:1px solid var(--rule);border-radius:var(--r-lg);padding:24px;transition:all .18s;position:relative;overflow:hidden;}
+.fc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--rule);transition:background .18s;}
+.fc:hover{border-color:var(--navy-md);box-shadow:var(--sh-md);transform:translateY(-3px);}
+.fc:hover::before{background:var(--navy);}
+.fc-ico{font-size:24px;margin-bottom:14px;}
+.fc h3{font-size:14px;font-weight:700;color:var(--navy-dk);margin-bottom:8px;letter-spacing:-.01em;}
+.fc p{font-size:13px;color:var(--mid);line-height:1.65;}
+.fc ul{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:3px;}
+.fc li{font-size:12px;color:var(--muted);display:flex;align-items:flex-start;gap:6px;line-height:1.45;}
+.fc li::before{content:'—';color:var(--rule);font-size:10px;flex-shrink:0;margin-top:2px;}
+.proto-strip{display:flex;gap:7px;flex-wrap:wrap;margin-top:36px;}
+.proto{background:var(--navy-lt);color:var(--navy);font-size:11.5px;font-weight:600;padding:5px 13px;border-radius:20px;letter-spacing:.02em;border:1px solid rgba(0,54,56,.12);}
+
+/* ── DEMO SECTION ── */
+.demo-layout{display:grid;grid-template-columns:1fr 560px 1fr;gap:28px;align-items:start;margin-top:48px;}
+.demo-sidebar{display:flex;flex-direction:column;gap:10px;padding-top:10px;}
+.df{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:14px 16px;}
+.df h4{font-size:11px;font-weight:700;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;}
+.df p{font-size:12px;color:rgba(255,255,255,.6);line-height:1.6;}
+.demo-center{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.demo-monitor{background:#0d1117;border-radius:10px;padding:6px;box-shadow:0 24px 60px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.06);width:100%;}
+.demo-monitor-screen{border-radius:6px;overflow:hidden;background:#000;}
+.demo-cam-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#000;}
+.demo-cam-cell{position:relative;background:#111;overflow:hidden;aspect-ratio:16/9;}
+.demo-cam-cell.wide{grid-column:span 2;aspect-ratio:auto;}
+.demo-cam-img{width:100%;height:100%;object-fit:cover;opacity:.8;}
+.dcam-label{position:absolute;bottom:3px;left:4px;font-size:7px;font-weight:700;color:rgba(255,255,255,.7);font-family:var(--mono);background:rgba(0,0,0,.55);padding:1px 4px;border-radius:2px;}
+.dcam-live{position:absolute;top:3px;right:4px;font-size:6px;font-weight:700;color:#4ade80;background:rgba(0,0,0,.55);padding:1px 4px;border-radius:2px;display:flex;align-items:center;gap:2px;}
+.demo-hud{background:#0d1117;padding:5px 10px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.05);}
+.demo-hud-left{display:flex;align-items:center;gap:10px;}
+.demo-hud span{font-size:8px;color:rgba(255,255,255,.35);font-family:var(--mono);}
+.demo-hud .live-indicator{display:flex;align-items:center;gap:4px;color:#4ade80;}
+.demo-hud .live-indicator::before{content:'';width:5px;height:5px;border-radius:50%;background:#4ade80;animation:blink 1.5s infinite;display:block;}
+.demo-stand{width:50px;height:14px;background:#181c22;margin:0 auto;border-radius:0 0 4px 4px;}
+.demo-base{width:80px;height:4px;background:#1a1e26;margin:0 auto;border-radius:2px;}
+.demo-url-bar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:6px 14px;font-size:11px;color:rgba(255,255,255,.5);font-family:var(--mono);width:100%;}
+.demo-url-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;flex-shrink:0;}
+
+/* ── SPEC TABLE ── */
+.spec-layout{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start;margin-top:48px;}
+.spec-table-wrap{background:var(--white);border-radius:var(--r-lg);box-shadow:var(--sh-md);overflow:hidden;border:1px solid var(--rule);}
+.spec-table{width:100%;border-collapse:collapse;}
+.spec-table thead tr{background:var(--navy-dk);}
+.spec-table thead th{padding:11px 18px;font-size:10px;font-weight:700;color:rgba(255,255,255,.7);text-align:left;letter-spacing:.12em;text-transform:uppercase;}
+.spec-table tbody td{padding:9px 18px;font-size:12.5px;border-bottom:1px solid var(--rule-lt);vertical-align:top;line-height:1.5;color:var(--mid);}
+.spec-table tbody td.sl{font-weight:600;color:var(--navy-dk);width:34%;white-space:nowrap;}
+.spec-table tbody tr.alt td{background:var(--off);}
+.spec-table tbody tr:last-child td{border-bottom:none;}
+.spec-table tbody tr:hover td{background:var(--navy-lt);transition:background .1s;}
+.dl-sidebar{display:flex;flex-direction:column;gap:14px;}
+.dl-card{background:var(--white);border-radius:var(--r-lg);box-shadow:var(--sh);padding:22px;border:1px solid var(--rule);}
+.dl-card h3{font-size:14px;font-weight:700;color:var(--navy-dk);margin-bottom:6px;}
+.dl-card p{font-size:12.5px;color:var(--muted);line-height:1.65;margin-bottom:16px;}
+
+/* ── QUOTE FORM ── */
+.quote-wrap{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:start;margin-top:48px;}
+.quote-intro p{font-size:15px;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:24px;}
+.q-bullet{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px;}
+.q-bullet-ico{width:36px;height:36px;background:rgba(212,168,0,.15);border:1px solid rgba(212,168,0,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.q-bullet-text h4{font-size:13px;font-weight:700;color:var(--white);margin-bottom:2px;}
+.q-bullet-text p{font-size:12px;color:rgba(255,255,255,.5);line-height:1.55;}
+.quote-form{background:var(--white);border-radius:var(--r-lg);box-shadow:var(--sh-xl);padding:32px;border:1px solid var(--rule);}
+.quote-form h3{font-size:18px;font-weight:800;color:var(--navy-dk);margin-bottom:4px;letter-spacing:-.02em;}
+.quote-form .form-sub{font-size:13px;color:var(--muted);margin-bottom:24px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.form-row.single{grid-template-columns:1fr;}
+.fld{display:flex;flex-direction:column;gap:5px;}
+.fld label{font-size:11.5px;font-weight:600;color:var(--navy-dk);letter-spacing:.01em;}
+.fld input,.fld select,.fld textarea{font-family:var(--font);font-size:13px;color:var(--dark);background:var(--off);border:1.5px solid var(--rule);border-radius:7px;padding:9px 12px;outline:none;transition:border .13s,background .13s;}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--navy-md);background:var(--white);}
+.fld textarea{resize:vertical;min-height:70px;}
+.form-divider{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);border-bottom:1px solid var(--rule-lt);padding-bottom:6px;margin:20px 0 14px;}
+.radio-group{display:flex;flex-direction:column;gap:6px;}
+.radio-opt{display:flex;align-items:center;gap:8px;cursor:pointer;padding:6px 10px;border-radius:6px;border:1.5px solid var(--rule);background:var(--off);transition:all .12s;font-size:12.5px;color:var(--mid);}
+.radio-opt:hover{border-color:var(--navy-md);background:var(--navy-lt);}
+.radio-opt input[type=radio]{accent-color:var(--navy);}
+.radio-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.submit-btn{width:100%;background:var(--navy);color:var(--white);font-size:14px;font-weight:700;padding:13px 24px;border-radius:8px;border:none;cursor:pointer;font-family:var(--font);transition:all .14s;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.submit-btn:hover{background:var(--navy-dk);transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,54,56,.25);}
+.form-note{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;}
+/* Success state */
+.form-success{display:none;text-align:center;padding:40px 20px;}
+.form-success .check-ico{font-size:48px;margin-bottom:16px;}
+.form-success h4{font-size:18px;font-weight:800;color:var(--navy-dk);margin-bottom:8px;}
+.form-success p{font-size:13px;color:var(--muted);line-height:1.65;}
+
+/* ── SUPPORT SECTION ── */
+.support-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;}
+.support-card{background:var(--white);border:1px solid var(--rule);border-radius:var(--r-lg);padding:28px;box-shadow:var(--sh);}
+.support-card h3{font-size:16px;font-weight:700;color:var(--navy-dk);margin-bottom:8px;display:flex;align-items:center;gap:10px;}
+.support-card p{font-size:13px;color:var(--mid);line-height:1.7;margin-bottom:20px;}
+.browser-btns{display:flex;flex-direction:column;gap:8px;}
+.browser-btn{display:flex;align-items:center;gap:12px;padding:11px 16px;border-radius:8px;border:1.5px solid var(--rule);background:var(--off);cursor:pointer;transition:all .14s;text-decoration:none;}
+.browser-btn:hover{border-color:var(--navy-md);background:var(--navy-lt);transform:translateX(2px);}
+.browser-ico{font-size:20px;flex-shrink:0;}
+.browser-info{flex:1;}
+.browser-name{font-size:13px;font-weight:600;color:var(--navy-dk);}
+.browser-desc{font-size:11.5px;color:var(--muted);margin-top:1px;}
+.browser-tag{background:var(--navy);color:var(--white);font-size:11px;font-weight:700;padding:4px 10px;border-radius:5px;white-space:nowrap;flex-shrink:0;}
+.step-list{display:flex;flex-direction:column;gap:14px;}
+.step-item{display:flex;align-items:flex-start;gap:14px;}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--white);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-body h4{font-size:13px;font-weight:700;color:var(--navy-dk);margin-bottom:3px;}
+.step-body p{font-size:12.5px;color:var(--mid);line-height:1.6;}
+.dl-stylus-btn{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:var(--navy-dk);font-size:13px;font-weight:700;padding:10px 20px;border-radius:7px;border:none;cursor:pointer;font-family:var(--font);transition:all .14s;margin-top:12px;text-decoration:none;}
+.dl-stylus-btn:hover{background:#e6bb00;transform:translateY(-1px);}
+.code-block{background:var(--navy-dk);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.75);line-height:1.7;margin-top:12px;overflow-x:auto;position:relative;}
+.code-block .comment{color:rgba(255,255,255,.35);}
+.code-block .prop{color:#7dd3fc;}
+.code-block .val{color:#86efac;}
+.copy-btn{position:absolute;top:8px;right:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:10px;font-weight:600;padding:3px 10px;border-radius:4px;cursor:pointer;font-family:var(--font);transition:all .12s;}
+.copy-btn:hover{background:rgba(255,255,255,.14);color:var(--white);}
+.browser-detect-note{background:var(--yellow-lt);border:1px solid rgba(212,168,0,.3);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--navy-dk);margin-bottom:16px;display:flex;align-items:flex-start;gap:8px;}
+.browser-detect-note span{font-weight:700;}
+
+/* ── FOOTER ── */
+footer{background:var(--navy-dk);padding:40px 0;}
+.foot-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.foot-logo img{height:32px;filter:brightness(0) invert(1);opacity:.6;}
+.foot-links{display:flex;gap:20px;flex-wrap:wrap;}
+.foot-links a{font-size:12.5px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .13s;}
+.foot-links a:hover{color:rgba(255,255,255,.75);}
+.foot-meta p{font-size:12px;color:rgba(255,255,255,.3);margin-bottom:3px;}
+.foot-meta a{color:rgba(255,255,255,.4);text-decoration:none;}
+.foot-meta a:hover{color:rgba(255,255,255,.65);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;}
+  .nvr-device{display:none;}
+  .demo-layout{grid-template-columns:1fr;}
+  .demo-sidebar{display:none;}
+  .quote-wrap{grid-template-columns:1fr;}
+  .spec-layout{grid-template-columns:1fr;}
+  .support-layout{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .feat-grid{grid-template-columns:1fr 1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .radio-grid{grid-template-columns:1fr;}
+  .nav-links .nl{display:none;}
+}
+@media(max-width:480px){
+  .feat-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="https://www.triton.net">
+      <!-- Triton wordmark – swap for real logo src if available -->
+      <svg height="32" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" rx="8" fill="#005457"/>
+        <path d="M8 10h20M18 10v18" stroke="#D4A800" stroke-width="3" stroke-linecap="round"/>
+        <text x="44" y="27" font-family="Inter,sans-serif" font-weight="800" font-size="18" fill="#003638" letter-spacing="-0.5">triton</text>
+        <text x="44" y="37" font-family="Inter,sans-serif" font-weight="500" font-size="9" fill="#7A8A8A" letter-spacing="0.08em">TECHNOLOGIES, INC.</text>
+      </svg>
+    </a>
+    <div class="nav-links">
+      <a class="nl" href="https://www.triton.net">Home</a>
+      <a class="nl active" href="#features">Features</a>
+      <a class="nl" href="#demo">Demo</a>
+      <a class="nl" href="#specs">Specs</a>
+      <a class="nl" href="#support">Support</a>
+    </div>
+    <a class="nav-cta" href="#quote">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Get a Quote
+    </a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-kicker">TTI-NVR · Network Video Recorder</div>
+      <h1>Professional<br><strong>Frigate NVR</strong><br>on Debian 12</h1>
+      <p class="hero-sub">Enterprise-grade, AI-powered video surveillance running Frigate on Docker. Local processing, zero subscription fees, full retention control — deployed and supported by Triton Technologies.</p>
+      <div class="hero-btns">
+        <a class="btn-primary" href="#demo">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+          Live Demo
+        </a>
+        <a class="btn-outline" href="#quote">Request Quote</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><div class="v">24/7</div><div class="l">Continuous Recording</div></div>
+        <div class="hs"><div class="v">0 $</div><div class="l">Monthly Cloud Fees</div></div>
+        <div class="hs"><div class="v">AI</div><div class="l">Object Detection</div></div>
+        <div class="hs"><div class="v">100%</div><div class="l">Local Processing</div></div>
+      </div>
+    </div>
+    <div class="nvr-device">
+      <div class="device-glow"></div>
+      <div class="monitor-frame">
+        <div class="monitor-screen">
+          <div class="cam-grid" style="height:220px;">
+            <div class="cam-cell">
+              <img src="https://picsum.photos/seed/cam1/300/200" alt="Camera 1"/>
+              <div class="cam-label">CAM-01 · Entrance</div>
+              <div class="cam-live"><span class="cam-dot"></span>LIVE</div>
+            </div>
+            <div class="cam-cell">
+              <img src="https://picsum.photos/seed/cam2/300/200" alt="Camera 2"/>
+              <div class="cam-label">CAM-02 · Parking</div>
+              <div class="cam-live"><span class="cam-dot"></span>LIVE</div>
+            </div>
+            <div class="cam-cell">
+              <img src="https://picsum.photos/seed/cam3/300/200" alt="Camera 3"/>
+              <div class="cam-label">CAM-03 · Rear</div>
+              <div class="cam-live"><span class="cam-dot"></span>LIVE</div>
+            </div>
+            <div class="cam-cell">
+              <img src="https://picsum.photos/seed/cam4/300/200" alt="Camera 4"/>
+              <div class="cam-label">CAM-04 · Side Gate</div>
+              <div class="cam-live"><span class="cam-dot"></span>LIVE</div>
+            </div>
+          </div>
+          <div class="nvr-bar">
+            <div class="nvr-bar-status"><div class="nvr-bar-dot"></div><span>mckay-nvr.triton.net</span></div>
+            <span id="nvr-clock">--:--:--</span>
+          </div>
+        </div>
+        <div class="monitor-stand"></div>
+        <div class="monitor-base"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<span class="anchor" id="features"></span>
+<section class="section">
+  <div class="container">
+    <span class="sec-eyebrow">Platform Features</span>
+    <h2 class="sec-title">Everything in one box</h2>
+    <p class="sec-desc">Frigate is a self-hosted NVR with real-time AI object detection, designed for privacy-first deployments with no cloud dependency.</p>
+    <div class="feat-grid">
+      <div class="fc"><div class="fc-ico">🤖</div><h3>AI Object Detection</h3><p>Real-time person, vehicle, and object detection using Coral TPU or CPU — all on-premises, never leaves your network.</p><ul><li>Person, car, animal detection</li><li>Configurable detection zones</li><li>Coral Edge TPU support</li><li>Custom model support</li></ul></div>
+      <div class="fc"><div class="fc-ico">📹</div><h3>Multi-Camera Support</h3><p>Connect dozens of IP cameras via RTSP, RTMP, or HTTP streams. Supports virtually any ONVIF-compatible camera.</p><ul><li>RTSP / RTMP / HTTP streams</li><li>ONVIF compatible cameras</li><li>Sub-stream recording</li><li>PTZ control ready</li></ul></div>
+      <div class="fc"><div class="fc-ico">💾</div><h3>Flexible Recording</h3><p>Choose continuous recording, motion-triggered, or AI detection-based recording with full retention policy control.</p><ul><li>Continuous or event recording</li><li>Configurable retention days</li><li>Local NAS or direct storage</li><li>H.264 / H.265 streams</li></ul></div>
+      <div class="fc"><div class="fc-ico">🔒</div><h3>Private by Design</h3><p>Runs entirely on your LAN. No cloud account, no subscription, no video leaving your premises. You own your data.</p><ul><li>Zero cloud dependency</li><li>VPN/VLAN ready</li><li>Local authentication</li><li>Encrypted storage option</li></ul></div>
+      <div class="fc"><div class="fc-ico">🐋</div><h3>Docker on Debian 12</h3><p>Deployed as a hardened Docker container on Debian 12 Bookworm for maximum stability and easy updates.</p><ul><li>Debian 12 Bookworm base</li><li>Docker Compose managed</li><li>Automated update path</li><li>Health monitoring</li></ul></div>
+      <div class="fc"><div class="fc-ico">📡</div><h3>MQTT & Home Automation</h3><p>Native MQTT publishing for every detection event — integrates seamlessly with Home Assistant, Node-RED, and more.</p><ul><li>MQTT event publishing</li><li>Home Assistant add-on</li><li>REST API access</li><li>Webhooks support</li></ul></div>
+    </div>
+    <div class="proto-strip">
+      <span class="proto">Frigate 0.14</span>
+      <span class="proto">Debian 12 Bookworm</span>
+      <span class="proto">Docker</span>
+      <span class="proto">RTSP / ONVIF</span>
+      <span class="proto">Coral TPU</span>
+      <span class="proto">MQTT</span>
+      <span class="proto">Home Assistant</span>
+      <span class="proto">H.264 / H.265</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── DEMO ── -->
+<span class="anchor" id="demo"></span>
+<section class="section section-navy">
+  <div class="container">
+    <span class="sec-eyebrow lt">Live Demonstration</span>
+    <h2 class="sec-title lt">See it in action</h2>
+    <p class="sec-desc lt">Our always-on demo instance at <strong style="color:rgba(255,255,255,.85)">demo-nvr.triton.net</strong> lets you explore the full Frigate interface before you commit. No login required.</p>
+    <div class="demo-layout">
+      <div class="demo-sidebar">
+        <div class="df"><h4>📍 Live Site</h4><p><strong style="color:rgba(255,255,255,.85)">mckay-nvr.triton.net</strong> — production deployment running Frigate on Triton infrastructure. Multi-camera 24/7 continuous recording.</p></div>
+        <div class="df"><h4>🧪 Demo Site</h4><p><strong style="color:rgba(255,255,255,.85)">demo-nvr.triton.net</strong> — public demonstration instance. Explore the interface, event timeline, and detection features.</p></div>
+        <div class="df"><h4>🔗 No Account Needed</h4><p>The demo is read-only and requires no login. See real camera feeds and AI detection events live.</p></div>
+      </div>
+      <div class="demo-center">
+        <div class="demo-url-bar">
+          <div class="demo-url-dot"></div>
+          demo-nvr.triton.net
+        </div>
+        <div class="demo-monitor">
+          <div class="demo-monitor-screen">
+            <div class="demo-cam-grid">
+              <div class="demo-cam-cell wide" style="grid-column:span 2;aspect-ratio:16/7;">
+                <img class="demo-cam-img" src="https://picsum.photos/seed/nvr-main/600/250" alt="Main camera"/>
+                <div class="dcam-label">CAM-01 · Main Entrance — 4K</div>
+                <div class="dcam-live"><span style="width:4px;height:4px;border-radius:50%;background:#4ade80;display:inline-block;animation:blink 1.5s infinite;"></span>&nbsp;LIVE</div>
+              </div>
+              <div class="demo-cam-cell" style="aspect-ratio:16/7;">
+                <img class="demo-cam-img" src="https://picsum.photos/seed/nvr-side/300/150" alt="Side camera"/>
+                <div class="dcam-label">CAM-02 · Side</div>
+              </div>
+              <div class="demo-cam-cell">
+                <img class="demo-cam-img" src="https://picsum.photos/seed/nvr-rear/300/150" alt="Rear camera"/>
+                <div class="dcam-label">CAM-03 · Rear</div>
+              </div>
+              <div class="demo-cam-cell">
+                <img class="demo-cam-img" src="https://picsum.photos/seed/nvr-lot/300/150" alt="Lot camera"/>
+                <div class="dcam-label">CAM-04 · Lot</div>
+              </div>
+              <div class="demo-cam-cell">
+                <img class="demo-cam-img" src="https://picsum.photos/seed/nvr-gate/300/150" alt="Gate camera"/>
+                <div class="dcam-label">CAM-05 · Gate</div>
+              </div>
+              <div class="demo-cam-cell">
+                <img class="demo-cam-img" src="https://picsum.photos/seed/nvr-dock/300/150" alt="Dock camera"/>
+                <div class="dcam-label">CAM-06 · Dock</div>
+              </div>
+            </div>
+            <div class="demo-hud">
+              <div class="demo-hud-left">
+                <span class="live-indicator">LIVE</span>
+                <span id="demo-clock">--:--:--</span>
+              </div>
+              <span>Frigate · Triton NVR Demo · demo-nvr.triton.net</span>
+            </div>
+          </div>
+          <div class="demo-stand"></div>
+          <div class="demo-base"></div>
+        </div>
+        <a class="btn-primary" href="http://demo-nvr.triton.net" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open Live Demo
+        </a>
+      </div>
+      <div class="demo-sidebar">
+        <div class="df"><h4>🎯 AI Detection</h4><p>Watch real-time object detection with bounding boxes. Frigate identifies persons, vehicles, animals, and custom objects.</p></div>
+        <div class="df"><h4>📅 Event Timeline</h4><p>Browse the event history, review clip recordings, and filter by camera, object type, or time range.</p></div>
+        <div class="df"><h4>⚙️ Configuration</h4><p>Explore detection zones, recording rules, and retention settings all from the web UI — no SSH required.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SPECS ── -->
+<span class="anchor" id="specs"></span>
+<section class="section section-alt">
+  <div class="container">
+    <span class="sec-eyebrow">Technical Specifications</span>
+    <h2 class="sec-title">System specifications</h2>
+    <p class="sec-desc">Reference hardware and software configuration for a Triton-deployed Frigate NVR system.</p>
+    <div class="spec-layout">
+      <div class="spec-table-wrap">
+        <table class="spec-table">
+          <thead><tr><th>Category</th><th>Specification</th></tr></thead>
+          <tbody>
+            <tr><td class="sl">Operating System</td><td>Debian 12 Bookworm (64-bit)</td></tr>
+            <tr class="alt"><td class="sl">Container Runtime</td><td>Docker 26.x / Docker Compose v2</td></tr>
+            <tr><td class="sl">NVR Software</td><td>Frigate 0.14 (latest stable)</td></tr>
+            <tr class="alt"><td class="sl">Video Streams</td><td>RTSP, RTMP, HTTP (MJPEG)</td></tr>
+            <tr><td class="sl">Camera Protocol</td><td>ONVIF, proprietary RTSP</td></tr>
+            <tr class="alt"><td class="sl">AI Inference</td><td>Coral Edge TPU (USB/PCIe) or CPU</td></tr>
+            <tr><td class="sl">Object Models</td><td>COCO SSD MobileNet V2 (default), custom</td></tr>
+            <tr class="alt"><td class="sl">Recording Modes</td><td>Continuous, Motion-triggered, AI detection</td></tr>
+            <tr><td class="sl">Codec Support</td><td>H.264, H.265/HEVC, MJPEG</td></tr>
+            <tr class="alt"><td class="sl">Hardware Decode</td><td>Intel QSV, VA-API, NVIDIA NVDEC</td></tr>
+            <tr><td class="sl">Storage Interface</td><td>Local disk, NAS (NFS/SMB), iSCSI</td></tr>
+            <tr class="alt"><td class="sl">Retention Policy</td><td>Configurable per-camera (days or GB cap)</td></tr>
+            <tr><td class="sl">Web Interface</td><td>Responsive web UI (port 5000)</td></tr>
+            <tr class="alt"><td class="sl">API</td><td>REST + MQTT event bus</td></tr>
+            <tr><td class="sl">Notifications</td><td>MQTT, Telegram, Gotify, Home Assistant</td></tr>
+            <tr class="alt"><td class="sl">Recommended RAM</td><td>8 GB minimum, 16 GB recommended</td></tr>
+            <tr><td class="sl">Recommended CPU</td><td>Intel N100 / i5 6th gen+ (iGPU preferred)</td></tr>
+            <tr class="alt"><td class="sl">Min. Storage</td><td>256 GB SSD OS + recording storage</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="dl-sidebar">
+        <div class="dl-card">
+          <h3>📋 Resources</h3>
+          <p>Documentation, setup guides, and support links for Triton NVR deployments.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="https://docs.frigate.video" target="_blank" style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--off);border-radius:var(--r);border:1px solid var(--rule);text-decoration:none;transition:all .14s;" onmouseover="this.style.borderColor='var(--navy-md)'" onmouseout="this.style.borderColor='var(--rule)'">
+              <span style="font-size:20px;">📖</span>
+              <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--navy-dk);">Frigate Documentation</div><div style="font-size:11px;color:var(--muted);">Official configuration reference</div></div>
+              <span style="background:var(--navy);color:var(--white);font-size:11px;font-weight:700;padding:4px 10px;border-radius:5px;">↗</span>
+            </a>
+            <a href="https://github.com/blakeblackshear/frigate" target="_blank" style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--off);border-radius:var(--r);border:1px solid var(--rule);text-decoration:none;transition:all .14s;" onmouseover="this.style.borderColor='var(--navy-md)'" onmouseout="this.style.borderColor='var(--rule)'">
+              <span style="font-size:20px;">⚙️</span>
+              <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--navy-dk);">GitHub — Frigate</div><div style="font-size:11px;color:var(--muted);">Source, issues & releases</div></div>
+              <span style="background:var(--navy);color:var(--white);font-size:11px;font-weight:700;padding:4px 10px;border-radius:5px;">↗</span>
+            </a>
+            <a href="http://mckay-nvr.triton.net" target="_blank" style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--off);border-radius:var(--r);border:1px solid var(--rule);text-decoration:none;transition:all .14s;" onmouseover="this.style.borderColor='var(--navy-md)'" onmouseout="this.style.borderColor='var(--rule)'">
+              <span style="font-size:20px;">📡</span>
+              <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--navy-dk);">McKay NVR — Live Site</div><div style="font-size:11px;color:var(--muted);">mckay-nvr.triton.net</div></div>
+              <span style="background:var(--navy);color:var(--white);font-size:11px;font-weight:700;padding:4px 10px;border-radius:5px;">↗</span>
+            </a>
+          </div>
+        </div>
+        <div class="dl-card" style="background:var(--navy-dk);border-color:rgba(255,255,255,.08);">
+          <h3 style="color:var(--white);">🚀 Ready to deploy?</h3>
+          <p style="color:rgba(255,255,255,.55);">Triton handles the full install — hardware selection, OS hardening, Docker setup, camera commissioning, and ongoing support.</p>
+          <a class="btn-primary" href="#quote" style="display:inline-flex;margin-top:4px;">Get a Quote →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── QUOTE / REQUEST ── -->
+<span class="anchor" id="quote"></span>
+<section class="section section-navy">
+  <div class="container">
+    <div class="quote-wrap">
+      <div class="quote-intro">
+        <span class="sec-eyebrow lt">Get Started</span>
+        <h2 class="sec-title lt">Request a quote</h2>
+        <p>Tell us about your current setup and what you're looking for. We'll follow up with a tailored proposal — no pressure, no obligation.</p>
+        <div class="q-bullet"><div class="q-bullet-ico">📞</div><div class="q-bullet-text"><h4>Personal Consultation</h4><p>A Triton engineer will review your site and camera requirements before quoting.</p></div></div>
+        <div class="q-bullet"><div class="q-bullet-ico">💰</div><div class="q-bullet-text"><h4>Transparent Pricing</h4><p>Hardware, installation, and support costs laid out clearly — no hidden fees.</p></div></div>
+        <div class="q-bullet"><div class="q-bullet-ico">⚡</div><div class="q-bullet-text"><h4>Fast Turnaround</h4><p>Most quotes delivered within one business day. Installations scheduled same week for standard deployments.</p></div></div>
+      </div>
+      <div class="quote-form" id="quoteFormWrap">
+        <div id="quoteFormInner">
+          <h3>NVR Quote Request</h3>
+          <p class="form-sub">Fill out the form below and we'll be in touch shortly.</p>
+
+          <div class="form-divider">Contact Information</div>
+          <div class="form-row">
+            <div class="fld"><label>Contact Name *</label><input type="text" id="f-name" placeholder="Jane Smith" required/></div>
+            <div class="fld"><label>Company</label><input type="text" id="f-company" placeholder="Acme Corp"/></div>
+          </div>
+          <div class="form-row">
+            <div class="fld"><label>Phone *</label><input type="tel" id="f-phone" placeholder="(616) 555-0100" required/></div>
+            <div class="fld"><label>Email *</label><input type="email" id="f-email" placeholder="jane@example.com" required/></div>
+          </div>
+
+          <div class="form-divider">Current Setup</div>
+          <div class="form-row single">
+            <div class="fld"><label>Do you have a system currently?</label>
+              <div class="radio-group" style="flex-direction:row;gap:10px;">
+                <label class="radio-opt"><input type="radio" name="has-system" value="yes"/> Yes, I have one</label>
+                <label class="radio-opt"><input type="radio" name="has-system" value="no" checked/> No, starting fresh</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="fld"><label>Number of cameras</label>
+              <select id="f-cameras">
+                <option value="">— Select —</option>
+                <option>1–4 cameras</option>
+                <option>5–8 cameras</option>
+                <option>9–16 cameras</option>
+                <option>17–32 cameras</option>
+                <option>32+ cameras</option>
+              </select>
+            </div>
+            <div class="fld"><label>Recording retention needed</label>
+              <select id="f-retention">
+                <option value="">— Select —</option>
+                <option>7 days</option>
+                <option>14 days</option>
+                <option>30 days</option>
+                <option>60 days</option>
+                <option>90 days</option>
+                <option>Custom / I'm not sure</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="fld"><label>Recording mode preference</label>
+              <div class="radio-group" style="flex-direction:row;gap:10px;flex-wrap:wrap;">
+                <label class="radio-opt"><input type="radio" name="rec-mode" value="continuous"/> Continuous 24/7</label>
+                <label class="radio-opt"><input type="radio" name="rec-mode" value="motion" checked/> Motion / AI detection</label>
+                <label class="radio-opt"><input type="radio" name="rec-mode" value="both"/> Both</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="fld"><label>Make / model of current NVR (if any)</label><input type="text" id="f-current-nvr" placeholder="e.g. Hikvision DS-7608NXI, Synology, Amcrest — or leave blank"/></div>
+          </div>
+
+          <div class="form-divider">Timeline & Contact</div>
+          <div class="form-row single">
+            <div class="fld"><label>Timeframe to make a change</label>
+              <div class="radio-grid">
+                <label class="radio-opt"><input type="radio" name="timeframe" value="now"/> Ready now</label>
+                <label class="radio-opt"><input type="radio" name="timeframe" value="1mo" checked/> Within 1 month</label>
+                <label class="radio-opt"><input type="radio" name="timeframe" value="6mo"/> Within 6 months</label>
+                <label class="radio-opt"><input type="radio" name="timeframe" value="undecided"/> Still deciding</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="fld"><label>Best time to contact you</label>
+              <select id="f-contact-time">
+                <option value="">— Select —</option>
+                <option>Morning (8am–12pm)</option>
+                <option>Afternoon (12pm–5pm)</option>
+                <option>Evening (5pm–8pm)</option>
+                <option>Anytime</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="fld"><label>Additional notes</label><textarea id="f-notes" placeholder="Anything else we should know — site layout, special requirements, existing cabling…"></textarea></div>
+          </div>
+
+          <button class="submit-btn" onclick="submitQuote()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send Quote Request
+          </button>
+          <p class="form-note">We respect your privacy. Your information is used only to follow up on this request.</p>
+        </div>
+        <div class="form-success" id="quoteSuccess">
+          <div class="check-ico">✅</div>
+          <h4>Request received!</h4>
+          <p>Thank you — a Triton engineer will review your request and reach out at your preferred contact time. We typically respond within one business day.</p>
+          <a class="btn-primary" href="https://www.triton.net" style="margin:20px auto 0;display:inline-flex;">Return to Triton.net →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SUPPORT ── -->
+<span class="anchor" id="support"></span>
+<section class="section">
+  <div class="container">
+    <span class="sec-eyebrow">Customer Support</span>
+    <h2 class="sec-title">Remove the filmstrip from Frigate</h2>
+    <p class="sec-desc">The Frigate web UI includes a filmstrip bar along the top that some customers prefer to hide. Follow these two steps using the free Stylus browser extension.</p>
+    <div class="support-layout">
+
+      <!-- Step 1: Install Stylus -->
+      <div class="support-card">
+        <h3><span style="font-size:20px;">🧩</span> Step 1 — Install Stylus</h3>
+        <p>Stylus is a free browser extension that lets you apply custom CSS to any website — including your local Frigate instance. Choose your browser below.</p>
+        <div id="browser-detect-wrap" class="browser-detect-note" style="display:none;">
+          <span>🌐</span>
+          <div>Detected: <span id="detected-browser">your browser</span>. The matching extension link is highlighted below.</div>
+        </div>
+        <div class="browser-btns">
+          <a id="chrome-btn" href="https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne" target="_blank" class="browser-btn">
+            <span class="browser-ico">🟡</span>
+            <div class="browser-info">
+              <div class="browser-name">Google Chrome</div>
+              <div class="browser-desc">Chrome Web Store → Stylus extension</div>
+            </div>
+            <span class="browser-tag">Add to Chrome</span>
+          </a>
+          <a id="firefox-btn" href="https://addons.mozilla.org/en-US/firefox/addon/styl-us/" target="_blank" class="browser-btn">
+            <span class="browser-ico">🦊</span>
+            <div class="browser-info">
+              <div class="browser-name">Mozilla Firefox</div>
+              <div class="browser-desc">Firefox Add-ons → Stylus extension</div>
+            </div>
+            <span class="browser-tag">Add to Firefox</span>
+          </a>
+          <a id="edge-btn" href="https://microsoftedge.microsoft.com/addons/detail/stylus/fjnbnpbmkenffdnngjfgmeleoegfcffe" target="_blank" class="browser-btn">
+            <span class="browser-ico">🔵</span>
+            <div class="browser-info">
+              <div class="browser-name">Microsoft Edge</div>
+              <div class="browser-desc">Edge Add-ons → Stylus extension</div>
+            </div>
+            <span class="browser-tag">Add to Edge</span>
+          </a>
+          <a id="opera-btn" href="https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne" target="_blank" class="browser-btn">
+            <span class="browser-ico">🔴</span>
+            <div class="browser-info">
+              <div class="browser-name">Opera / Brave / Vivaldi</div>
+              <div class="browser-desc">Chrome Web Store is compatible with Chromium browsers</div>
+            </div>
+            <span class="browser-tag">Add Extension</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Step 2: Apply the style -->
+      <div class="support-card">
+        <h3><span style="font-size:20px;">🎨</span> Step 2 — Install the Clean View Style</h3>
+        <p>Once Stylus is installed, click the button below. Stylus will automatically detect the <code style="font-family:var(--mono);font-size:12px;background:var(--off);padding:1px 5px;border-radius:3px;">.user.css</code> file and prompt you to install it — targeting your Frigate instance to hide the filmstrip.</p>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Click "Install Clean View Style"</h4>
+              <p>The link below points to the Triton-hosted <code style="font-family:var(--mono);font-size:11px;">.user.css</code> file. Stylus intercepts this and opens its install dialog.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Review and confirm in Stylus</h4>
+              <p>The style targets your Frigate IP/hostname and hides the filmstrip. Click <em>Install Style</em> in the Stylus tab that opens.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Reload your Frigate tab</h4>
+              <p>Refresh your Frigate browser tab. The filmstrip bar will be gone. The style auto-updates when Triton releases changes.</p>
+            </div>
+          </div>
+        </div>
+        <a class="dl-stylus-btn" href="https://www.triton.net/frigate-clean-view.user.css" target="_blank">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Install Clean View Style
+        </a>
+        <div class="code-block" style="margin-top:20px;">
+          <button class="copy-btn" onclick="copyCSS()">Copy</button>
+          <span class="comment">/* ==UserStyle==</span><br>
+          <span class="prop">@name</span> <span class="val">Triton Frigate Clean View</span><br>
+          <span class="prop">@namespace</span> <span class="val">triton.net</span><br>
+          <span class="prop">@version</span> <span class="val">1.0.0</span><br>
+          <span class="prop">@updateURL</span> <span class="val">https://www.triton.net/frigate-clean-view.user.css</span><br>
+          <span class="prop">@description</span> <span class="val">Removes filmstrip and optimizes Frigate layout.</span><br>
+          <span class="comment">==/UserStyle== */</span><br><br>
+          <span class="comment">/* Targets your local Frigate instance */</span><br>
+          <span class="prop">@-moz-document</span> url-prefix(<span class="val">"http://your-frigate-ip:5000"</span>) {<br>
+          &nbsp;&nbsp;<span class="comment">/* Hide the filmstrip */</span><br>
+          &nbsp;&nbsp;<span class="val">.filmstrip, [class*="Filmstrip"]</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">display</span>: <span class="val">none !important</span>;<br>
+          &nbsp;&nbsp;}<br>
+          }
+        </div>
+        <p style="font-size:11.5px;color:var(--muted);margin-top:10px;">💡 Replace <code style="font-family:var(--mono);font-size:11px;">your-frigate-ip:5000</code> with your actual Frigate address if installing manually.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">
+      <svg height="28" viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="6" fill="rgba(255,255,255,0.15)"/>
+        <path d="M6 8h16M14 8v14" stroke="#D4A800" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="34" y="21" font-family="Inter,sans-serif" font-weight="800" font-size="14" fill="white" letter-spacing="-0.3">triton</text>
+        <text x="34" y="29" font-family="Inter,sans-serif" font-weight="400" font-size="7" fill="rgba(255,255,255,0.4)" letter-spacing="0.08em">TECHNOLOGIES, INC.</text>
+      </svg>
+    </div>
+    <div class="foot-links">
+      <a href="https://www.triton.net">triton.net</a>
+      <a href="#features">Features</a>
+      <a href="#demo">Demo</a>
+      <a href="#specs">Specs</a>
+      <a href="#quote">Get a Quote</a>
+      <a href="#support">Support</a>
+      <a href="http://mckay-nvr.triton.net" target="_blank">McKay NVR</a>
+      <a href="http://demo-nvr.triton.net" target="_blank">Demo NVR</a>
+    </div>
+    <div class="foot-meta">
+      <p>&copy; <span id="footer-year"></span> Triton Technologies, Inc. · TTI-NVR</p>
+      <p>Frigate is open-source software. <a href="https://github.com/blakeblackshear/frigate" target="_blank">github.com/blakeblackshear/frigate</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Clocks ──────────────────────────────────────────────────────────────────
+function tick() {
+  const t = new Date().toLocaleTimeString('en-US', {hour12:false});
+  const el1 = document.getElementById('nvr-clock');
+  const el2 = document.getElementById('demo-clock');
+  if (el1) el1.textContent = t;
+  if (el2) el2.textContent = t;
+}
+tick(); setInterval(tick, 1000);
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+// ── Browser Detection ────────────────────────────────────────────────────────
+(function() {
+  const ua = navigator.userAgent;
+  let browser = '';
+  let highlightId = '';
+  if (/Edg\//.test(ua)) { browser = 'Microsoft Edge'; highlightId = 'edge-btn'; }
+  else if (/Firefox\//.test(ua)) { browser = 'Firefox'; highlightId = 'firefox-btn'; }
+  else if (/OPR\/|Opera/.test(ua)) { browser = 'Opera'; highlightId = 'opera-btn'; }
+  else if (/Chrome\//.test(ua)) { browser = 'Google Chrome'; highlightId = 'chrome-btn'; }
+  else if (/Safari\//.test(ua) && !/Chrome/.test(ua)) { browser = 'Safari (use Chrome extension)'; highlightId = 'chrome-btn'; }
+
+  if (highlightId) {
+    const detected = document.getElementById('detected-browser');
+    if (detected) detected.textContent = browser;
+    const note = document.getElementById('browser-detect-wrap');
+    if (note) note.style.display = 'flex';
+    const btn = document.getElementById(highlightId);
+    if (btn) {
+      btn.style.borderColor = 'var(--navy-md)';
+      btn.style.background = 'var(--navy-lt)';
+      btn.querySelector('.browser-tag').style.background = 'var(--yellow)';
+      btn.querySelector('.browser-tag').style.color = 'var(--navy-dk)';
+    }
+  }
+})();
+
+// ── Quote form submit ────────────────────────────────────────────────────────
+function submitQuote() {
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  if (!name || !phone || !email) {
+    alert('Please fill in your name, phone, and email to continue.');
+    return;
+  }
+  document.getElementById('quoteFormInner').style.display = 'none';
+  document.getElementById('quoteSuccess').style.display = 'block';
+}
+
+// ── Copy CSS ─────────────────────────────────────────────────────────────────
+function copyCSS() {
+  const css = `/* ==UserStyle==
+@name Triton Frigate Clean View
+@namespace triton.net
+@version 1.0.0
+@updateURL https://www.triton.net/frigate-clean-view.user.css
+@description Removes filmstrip and optimizes Frigate layout.
+==/UserStyle== */
+
+@-moz-document url-prefix("http://your-frigate-ip:5000") {
+  .filmstrip, [class*="Filmstrip"] {
+    display: none !important;
+  }
+}`;
+  navigator.clipboard.writeText(css).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+
+// ── Smooth scroll for nav links ──────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+</script>
+</body>
+</html>
