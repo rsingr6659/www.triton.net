@@ -234,16 +234,16 @@ footer{background:var(--navy-dk);padding:40px 0;}
 
 /* ── Quote toast notification ─────────────────────────────── */
 #quote-toast{
-  position:fixed;bottom:32px;right:32px;z-index:99999;
+  position:fixed;top:50%;left:50%;z-index:99999;
   display:flex;align-items:center;gap:12px;
-  padding:14px 20px;border-radius:12px;
-  font-family:var(--font);font-size:14px;font-weight:600;
-  box-shadow:0 8px 32px rgba(0,0,0,.22);
+  padding:18px 32px;border-radius:14px;
+  font-family:var(--font);font-size:15px;font-weight:600;
+  box-shadow:0 20px 60px rgba(0,0,0,.40);
   pointer-events:none;
-  opacity:0;transform:translateY(16px);
+  opacity:0;transform:translate(-50%,calc(-50% + 20px));
   transition:opacity .3s ease,transform .3s ease;
 }
-#quote-toast.show{opacity:1;transform:translateY(0);}
+#quote-toast.show{opacity:1;transform:translate(-50%,-50%);}
 #quote-toast.sending{background:var(--navy-dk);color:#fff;}
 #quote-toast.sent{background:#16a34a;color:#fff;}
 #quote-toast.error{background:#b91c1c;color:#fff;}
@@ -859,9 +859,10 @@ function submitQuote() {
       // Switch to green "sent" toast for 2 s, then reveal success panel
       showToast('sent', 'Request sent!');
       setTimeout(function() {
-        hideToast(600);
-        document.getElementById('quoteFormInner').style.display = 'none';
-        document.getElementById('quoteSuccess').style.display   = 'block';
+        hideToast(350);
+        setTimeout(function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 400);
       }, 2000);
     } else {
       showToast('error', data.error || 'Something went wrong.');
