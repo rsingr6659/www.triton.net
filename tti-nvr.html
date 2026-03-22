@@ -762,34 +762,51 @@ document.getElementById('footer-year').textContent = new Date().getFullYear();
 
 // ── Quote form submit ────────────────────────────────────────────────────────
 function submitQuote() {
-  const name = document.getElementById('f-name').value.trim();
+  const name  = document.getElementById('f-name').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
   const email = document.getElementById('f-email').value.trim();
+
   if (!name || !phone || !email) {
     alert('Please fill in your name, phone, and email to continue.');
     return;
   }
-  const cameras     = document.getElementById('f-cameras')      ? document.getElementById('f-cameras').value      : '';
-  const location    = document.getElementById('f-location')     ? document.getElementById('f-location').value     : '';
-  const timeline    = document.getElementById('f-timeline')     ? document.getElementById('f-timeline').value     : '';
-  const contactTime = document.getElementById('f-contact-time') ? document.getElementById('f-contact-time').value : '';
-  const notes       = document.getElementById('f-notes')        ? document.getElementById('f-notes').value        : '';
 
-  const subject = encodeURIComponent('NVR Quote Request from ' + name);
-  const body = encodeURIComponent(
-    'Name: '  + name  + '\n' +
-    'Phone: ' + phone + '\n' +
-    'Email: ' + email + '\n' +
-    (cameras      ? 'Cameras: '             + cameras      + '\n' : '') +
-    (location     ? 'Location: '            + location     + '\n' : '') +
-    (timeline     ? 'Timeline: '            + timeline     + '\n' : '') +
-    (contactTime  ? 'Best time to contact: '+ contactTime  + '\n' : '') +
-    (notes        ? 'Notes: '               + notes        + '\n' : '')
-  );
-  window.location.href = 'mailto:nvr@triton.net?subject=' + subject + '&body=' + body;
+  const btn = document.querySelector('.submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending\u2026';
 
-  document.getElementById('quoteFormInner').style.display = 'none';
-  document.getElementById('quoteSuccess').style.display = 'block';
+  const payload = {
+    name,
+    phone,
+    email,
+    cameras:     (document.getElementById('f-cameras')      || {}).value || '',
+    location:    (document.getElementById('f-location')     || {}).value || '',
+    timeline:    (document.getElementById('f-timeline')     || {}).value || '',
+    contactTime: (document.getElementById('f-contact-time') || {}).value || '',
+    notes:       (document.getElementById('f-notes')        || {}).value || ''
+  };
+
+  fetch('send-quote.php', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify(payload)
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data.success) {
+      document.getElementById('quoteFormInner').style.display = 'none';
+      document.getElementById('quoteSuccess').style.display  = 'block';
+    } else {
+      alert('There was a problem sending your request: ' + (data.error || 'Unknown error.'));
+      btn.disabled    = false;
+      btn.textContent = 'Send Quote Request';
+    }
+  })
+  .catch(function() {
+    alert('Network error. Please try again or call us directly.');
+    btn.disabled    = false;
+    btn.textContent = 'Send Quote Request';
+  });
 }
 
 // ── Copy CSS ─────────────────────────────────────────────────────────────────
