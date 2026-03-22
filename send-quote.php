@@ -34,6 +34,12 @@ function clean($val) {
     return htmlspecialchars(strip_tags(trim((string)$val)), ENT_QUOTES, 'UTF-8');
 }
 
+// ── Helper: return value or "Not provided" ─────────────────────────────────────
+function val($v) {
+    $v = trim((string)$v);
+    return $v !== '' ? $v : 'Not provided';
+}
+
 // ── Required fields ────────────────────────────────────────────────────────────
 $name  = clean($data['name']  ?? '');
 $phone = clean($data['phone'] ?? '');
@@ -46,60 +52,78 @@ if (!$name || !$phone || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // ── Optional fields ────────────────────────────────────────────────────────────
-$company    = clean($data['company']    ?? '');
-$hasSystem  = clean($data['hasSystem']  ?? '');
-$cameras    = clean($data['cameras']    ?? '');
-$retention  = clean($data['retention']  ?? '');
-$recMode    = clean($data['recMode']    ?? '');
-$currentNvr = clean($data['currentNvr'] ?? '');
-$timeframe  = clean($data['timeframe']  ?? '');
-$contactTime= clean($data['contactTime']?? '');
-$notes      = clean($data['notes']      ?? '');
+$company    = clean($data['company']     ?? '');
+$hasSystem  = clean($data['hasSystem']   ?? '');
+$cameras    = clean($data['cameras']     ?? '');
+$retention  = clean($data['retention']   ?? '');
+$recMode    = clean($data['recMode']     ?? '');
+$currentNvr = clean($data['currentNvr']  ?? '');
+$timeframe  = clean($data['timeframe']   ?? '');
+$contactTime= clean($data['contactTime'] ?? '');
+$notes      = clean($data['notes']       ?? '');
 
 // ── Human-readable labels for radio values ─────────────────────────────────────
-$hasSystemLabel = ['yes' => 'Yes, has existing system', 'no' => 'No, starting fresh'];
-$recModeLabel   = ['continuous' => 'Continuous 24/7', 'motion' => 'Motion / AI detection', 'both' => 'Both'];
-$timeframeLabel = ['now' => 'Ready now', '1mo' => 'Within 1 month', '6mo' => 'Within 6 months', 'undecided' => 'Still deciding'];
+$hasSystemLabel = [
+    'yes' => 'Yes — has an existing system',
+    'no'  => 'No — starting fresh'
+];
+$recModeLabel = [
+    'continuous' => 'Continuous 24/7',
+    'motion'     => 'Motion / AI detection',
+    'both'       => 'Both'
+];
+$timeframeLabel = [
+    'now'       => 'Ready now',
+    '1mo'       => 'Within 1 month',
+    '6mo'       => 'Within 6 months',
+    'undecided' => 'Still deciding'
+];
 
-$hasSystemStr = $hasSystemLabel[$hasSystem] ?? $hasSystem;
-$recModeStr   = $recModeLabel[$recMode]     ?? $recMode;
-$timeframeStr = $timeframeLabel[$timeframe] ?? $timeframe;
+$hasSystemStr = val($hasSystemLabel[$hasSystem] ?? $hasSystem);
+$recModeStr   = val($recModeLabel[$recMode]     ?? $recMode);
+$timeframeStr = val($timeframeLabel[$timeframe] ?? $timeframe);
 
-// ── Build email body ───────────────────────────────────────────────────────────
-$sep   = str_repeat('-', 52);
+// ── Build email body — every field always included ────────────────────────────
+$sep = str_repeat('-', 52);
+
 $body  = "A new NVR quote request was submitted via the Triton website.\r\n";
 $body .= "{$sep}\r\n";
+
 $body .= "CONTACT INFORMATION\r\n";
 $body .= "{$sep}\r\n";
-$body .= "Name:              {$name}\r\n";
-if ($company)     $body .= "Company:           {$company}\r\n";
-$body .= "Phone:             {$phone}\r\n";
-$body .= "Email:             {$email}\r\n";
+$body .= "Name:              " . val($name)    . "\r\n";
+$body .= "Company:           " . val($company) . "\r\n";
+$body .= "Phone:             " . val($phone)   . "\r\n";
+$body .= "Email:             " . val($email)   . "\r\n";
 $body .= "\r\n";
+
 $body .= "CURRENT SETUP\r\n";
 $body .= "{$sep}\r\n";
-$body .= "Has existing system:    {$hasSystemStr}\r\n";
-if ($cameras)     $body .= "Number of cameras:      {$cameras}\r\n";
-if ($retention)   $body .= "Retention needed:       {$retention}\r\n";
-if ($recMode)     $body .= "Recording mode:         {$recModeStr}\r\n";
-if ($currentNvr)  $body .= "Current NVR make/model: {$currentNvr}\r\n";
+$body .= "Has existing system:    " . $hasSystemStr          . "\r\n";
+$body .= "Number of cameras:      " . val($cameras)          . "\r\n";
+$body .= "Recording retention:    " . val($retention)        . "\r\n";
+$body .= "Recording mode:         " . $recModeStr            . "\r\n";
+$body .= "Current NVR make/model: " . val($currentNvr)       . "\r\n";
 $body .= "\r\n";
+
 $body .= "TIMELINE & CONTACT\r\n";
 $body .= "{$sep}\r\n";
-if ($timeframe)   $body .= "Timeframe:         {$timeframeStr}\r\n";
-if ($contactTime) $body .= "Best time to call: {$contactTime}\r\n";
-if ($notes) {
-    $body .= "\r\nADDITIONAL NOTES\r\n";
-    $body .= "{$sep}\r\n";
-    $body .= "{$notes}\r\n";
-}
-$body .= "\r\n{$sep}\r\n";
+$body .= "Timeframe:         " . $timeframeStr       . "\r\n";
+$body .= "Best time to call: " . val($contactTime)   . "\r\n";
+$body .= "\r\n";
+
+$body .= "ADDITIONAL NOTES\r\n";
+$body .= "{$sep}\r\n";
+$body .= ($notes !== '' ? $notes : 'None') . "\r\n";
+$body .= "\r\n";
+
+$body .= "{$sep}\r\n";
 $body .= "Submitted: " . date('Y-m-d H:i:s T') . "\r\n";
 $body .= "Reply directly to this email to reach the requester.\r\n";
 
 // ── Headers — Reply-To is the submitter's email ────────────────────────────────
 $to      = 'nvr@triton.net';
-$subject = "NVR Quote Request" . ($company ? " — {$company}" : " — {$name}");
+$subject = "NVR Quote Request" . ($company !== '' ? " — {$company}" : " — {$name}");
 
 $headers  = "From: Triton Web Form <noreply@triton.net>\r\n";
 $headers .= "Reply-To: {$name} <{$email}>\r\n";
