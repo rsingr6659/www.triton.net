@@ -771,19 +771,33 @@ function submitQuote() {
     return;
   }
 
+  // Helper to get selected radio value by group name
+  function radioVal(name) {
+    const sel = document.querySelector('input[name="' + name + '"]:checked');
+    return sel ? sel.value : '';
+  }
+  function fieldVal(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
   const btn = document.querySelector('.submit-btn');
   btn.disabled = true;
   btn.textContent = 'Sending\u2026';
 
   const payload = {
-    name,
-    phone,
-    email,
-    cameras:     (document.getElementById('f-cameras')      || {}).value || '',
-    location:    (document.getElementById('f-location')     || {}).value || '',
-    timeline:    (document.getElementById('f-timeline')     || {}).value || '',
-    contactTime: (document.getElementById('f-contact-time') || {}).value || '',
-    notes:       (document.getElementById('f-notes')        || {}).value || ''
+    name:        name,
+    company:     fieldVal('f-company'),
+    phone:       phone,
+    email:       email,
+    hasSystem:   radioVal('has-system'),
+    cameras:     fieldVal('f-cameras'),
+    retention:   fieldVal('f-retention'),
+    recMode:     radioVal('rec-mode'),
+    currentNvr:  fieldVal('f-current-nvr'),
+    timeframe:   radioVal('timeframe'),
+    contactTime: fieldVal('f-contact-time'),
+    notes:       fieldVal('f-notes')
   };
 
   fetch('send-quote.php', {
