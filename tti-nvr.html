@@ -348,18 +348,16 @@ footer{background:var(--navy-dk);padding:40px 0;}
   <div class="container">
     <span class="sec-eyebrow lt">Live Demonstration</span>
     <h2 class="sec-title lt">See it in action</h2>
-    <p class="sec-desc lt">Our always-on demo instance at <strong style="color:rgba(255,255,255,.85)">demo-nvr.triton.net</strong> lets you explore the full Frigate interface before you commit. No login required.</p>
+    <p class="sec-desc lt">Our always-on demo instance at <strong style="color:rgba(255,255,255,.85)">demo.frigate.video</strong> lets you explore the full Frigate interface before you commit. No login required.</p>
     <div class="demo-layout">
       <div class="demo-sidebar">
         <div class="df"><h4>📍 Live Site</h4><p><strong style="color:rgba(255,255,255,.85)">mckay-nvr.triton.net</strong> — production deployment running Frigate on Triton infrastructure. Multi-camera 24/7 continuous recording.</p></div>
-        <div class="df"><h4>🧪 Demo Site</h4><p><strong style="color:rgba(255,255,255,.85)">demo-nvr.triton.net</strong> — public demonstration instance. Explore the interface, event timeline, and detection features.</p></div>
+        <div class="df"><h4>🧪 Demo Site</h4><p><strong style="color:rgba(255,255,255,.85)">demo.frigate.video</strong> — public demonstration instance. Explore the interface, event timeline, and detection features.</p></div>
         <div class="df"><h4>🔗 No Account Needed</h4><p>The demo is read-only and requires no login. See real camera feeds and AI detection events live.</p></div>
       </div>
       <div class="demo-center">
         <div class="demo-url-bar">
-          <div class="demo-url-dot"></div>
-          demo-nvr.triton.net
-        </div>
+          <div class="demo-url-dot"></div>demo.frigate.video</div>
         <div class="demo-monitor">
           <div class="demo-monitor-screen">
             <div class="demo-cam-grid">
@@ -394,13 +392,13 @@ footer{background:var(--navy-dk);padding:40px 0;}
                 <span class="live-indicator">LIVE</span>
                 <span id="demo-clock">--:--:--</span>
               </div>
-              <span>Frigate · Triton NVR Demo · demo-nvr.triton.net</span>
+              <span>Frigate · Triton NVR Demo · demo.frigate.video</span>
             </div>
           </div>
           <div class="demo-stand"></div>
           <div class="demo-base"></div>
         </div>
-        <a class="btn-primary" href="http://demo-nvr.triton.net" target="_blank">
+        <a class="btn-primary" href="https://demo.frigate.video" target="_blank">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           Open Live Demo
         </a>
@@ -462,11 +460,11 @@ footer{background:var(--navy-dk);padding:40px 0;}
               <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--navy-dk);">GitHub — Frigate</div><div style="font-size:11px;color:var(--muted);">Source, issues & releases</div></div>
               <span style="background:var(--navy);color:var(--white);font-size:11px;font-weight:700;padding:4px 10px;border-radius:5px;">↗</span>
             </a>
-            <a href="http://mckay-nvr.triton.net" target="_blank" style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--off);border-radius:var(--r);border:1px solid var(--rule);text-decoration:none;transition:all .14s;" onmouseover="this.style.borderColor='var(--navy-md)'" onmouseout="this.style.borderColor='var(--rule)'">
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);">
               <span style="font-size:20px;">📡</span>
-              <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--navy-dk);">McKay NVR — Live Site</div><div style="font-size:11px;color:var(--muted);">mckay-nvr.triton.net</div></div>
+              <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--navy-dk);">McKay NVR — Reference Deployment</div><div style="font-size:11px;color:var(--muted);">mckay-nvr.triton.net</div></div>
               <span style="background:var(--navy);color:var(--white);font-size:11px;font-weight:700;padding:4px 10px;border-radius:5px;">↗</span>
-            </a>
+            </div>
           </div>
         </div>
         <div class="dl-card" style="background:var(--navy-dk);border-color:rgba(255,255,255,.08);">
@@ -714,8 +712,8 @@ footer{background:var(--navy-dk);padding:40px 0;}
       <a href="#specs">Specs</a>
       <a href="#quote">Get a Quote</a>
       <a href="#support">Support</a>
-      <a href="http://mckay-nvr.triton.net" target="_blank">McKay NVR</a>
-      <a href="http://demo-nvr.triton.net" target="_blank">Demo NVR</a>
+      McKay NVR
+      <a href="https://demo.frigate.video" target="_blank">Demo NVR</a>
     </div>
     <div class="foot-meta">
       <p>&copy; <span id="footer-year"></span> Triton Technologies, Inc. · TTI-NVR</p>
@@ -771,6 +769,25 @@ function submitQuote() {
     alert('Please fill in your name, phone, and email to continue.');
     return;
   }
+  const cameras     = document.getElementById('f-cameras')      ? document.getElementById('f-cameras').value      : '';
+  const location    = document.getElementById('f-location')     ? document.getElementById('f-location').value     : '';
+  const timeline    = document.getElementById('f-timeline')     ? document.getElementById('f-timeline').value     : '';
+  const contactTime = document.getElementById('f-contact-time') ? document.getElementById('f-contact-time').value : '';
+  const notes       = document.getElementById('f-notes')        ? document.getElementById('f-notes').value        : '';
+
+  const subject = encodeURIComponent('NVR Quote Request from ' + name);
+  const body = encodeURIComponent(
+    'Name: '  + name  + '\n' +
+    'Phone: ' + phone + '\n' +
+    'Email: ' + email + '\n' +
+    (cameras      ? 'Cameras: '             + cameras      + '\n' : '') +
+    (location     ? 'Location: '            + location     + '\n' : '') +
+    (timeline     ? 'Timeline: '            + timeline     + '\n' : '') +
+    (contactTime  ? 'Best time to contact: '+ contactTime  + '\n' : '') +
+    (notes        ? 'Notes: '               + notes        + '\n' : '')
+  );
+  window.location.href = 'mailto:nvr@triton.net?subject=' + subject + '&body=' + body;
+
   document.getElementById('quoteFormInner').style.display = 'none';
   document.getElementById('quoteSuccess').style.display = 'block';
 }
