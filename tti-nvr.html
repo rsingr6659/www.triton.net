@@ -231,6 +231,30 @@ footer{background:var(--navy-dk);padding:40px 0;}
 @media(max-width:480px){
   .feat-grid{grid-template-columns:1fr;}
 }
+
+/* ── Quote toast notification ─────────────────────────────── */
+#quote-toast{
+  position:fixed;bottom:32px;right:32px;z-index:99999;
+  display:flex;align-items:center;gap:12px;
+  padding:14px 20px;border-radius:12px;
+  font-family:var(--font);font-size:14px;font-weight:600;
+  box-shadow:0 8px 32px rgba(0,0,0,.22);
+  pointer-events:none;
+  opacity:0;transform:translateY(16px);
+  transition:opacity .3s ease,transform .3s ease;
+}
+#quote-toast.show{opacity:1;transform:translateY(0);}
+#quote-toast.sending{background:var(--navy-dk);color:#fff;}
+#quote-toast.sent{background:#16a34a;color:#fff;}
+#quote-toast.error{background:#b91c1c;color:#fff;}
+.qt-spinner{
+  width:16px;height:16px;border-radius:50%;flex-shrink:0;
+  border:2px solid rgba(255,255,255,.3);
+  border-top-color:#fff;
+  animation:qt-spin .7s linear infinite;
+}
+@keyframes qt-spin{to{transform:rotate(360deg);}}
+.qt-icon{font-size:18px;line-height:1;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -771,19 +795,44 @@ function submitQuote() {
     return;
   }
 
-  // Helper to get selected radio value by group name
-  function radioVal(name) {
-    const sel = document.querySelector('input[name="' + name + '"]:checked');
-    return sel ? sel.value : '';
+  function radioVal(n) {
+    const el = document.querySelector('input[name="' + n + '"]:checked');
+    return el ? el.value : '';
   }
   function fieldVal(id) {
     const el = document.getElementById(id);
     return el ? el.value.trim() : '';
   }
 
+  // ── Toast helpers ──────────────────────────────────────────────────────────
+  const toast    = document.getElementById('quote-toast');
+  const spinner  = document.getElementById('qt-spinner');
+  const icon     = document.getElementById('qt-icon');
+  const msg      = document.getElementById('qt-msg');
+
+  function showToast(state, text) {
+    toast.className = 'show ' + state;
+    msg.textContent = text;
+    if (state === 'sending') {
+      spinner.style.display = 'block';
+      icon.style.display    = 'none';
+    } else {
+      spinner.style.display = 'none';
+      icon.style.display    = 'block';
+      icon.textContent      = state === 'sent' ? '\u2714' : '\u26A0';
+    }
+  }
+  function hideToast(delay) {
+    setTimeout(function() {
+      toast.classList.remove('show');
+    }, delay);
+  }
+
+  // ── Disable button, show sending toast ────────────────────────────────────
   const btn = document.querySelector('.submit-btn');
   btn.disabled = true;
-  btn.textContent = 'Sending\u2026';
+
+  showToast('sending', 'Sending your request\u2026');
 
   const payload = {
     name:        name,
@@ -808,18 +857,23 @@ function submitQuote() {
   .then(function(res) { return res.json(); })
   .then(function(data) {
     if (data.success) {
-      document.getElementById('quoteFormInner').style.display = 'none';
-      document.getElementById('quoteSuccess').style.display  = 'block';
+      // Switch to green "sent" toast for 2 s, then reveal success panel
+      showToast('sent', 'Request sent!');
+      setTimeout(function() {
+        hideToast(600);
+        document.getElementById('quoteFormInner').style.display = 'none';
+        document.getElementById('quoteSuccess').style.display   = 'block';
+      }, 2000);
     } else {
-      alert('There was a problem sending your request: ' + (data.error || 'Unknown error.'));
-      btn.disabled    = false;
-      btn.textContent = 'Send Quote Request';
+      showToast('error', data.error || 'Something went wrong.');
+      hideToast(4000);
+      btn.disabled = false;
     }
   })
   .catch(function() {
-    alert('Network error. Please try again or call us directly.');
-    btn.disabled    = false;
-    btn.textContent = 'Send Quote Request';
+    showToast('error', 'Network error \u2014 please try again.');
+    hideToast(4000);
+    btn.disabled = false;
   });
 }
 
@@ -853,5 +907,10 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
-</body>
+<!-- Quote toast -->
+<div id="quote-toast">
+  <span class="qt-spinner" id="qt-spinner"></span>
+  <span class="qt-icon"    id="qt-icon"    style="display:none;"></span>
+  <span id="qt-msg"></span>
+</div></body>
 </html>
