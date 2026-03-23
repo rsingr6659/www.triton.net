@@ -122,8 +122,8 @@ $body .= "Submitted: " . date('Y-m-d H:i:s T') . "\r\n";
 $body .= "Reply directly to this email to reach the requester.\r\n";
 
 // ── Headers — Reply-To is the submitter's email ────────────────────────────────
-$to      = 'nvr@triton.net';
-$subject = "NVR Quote Request" . ($company !== '' ? " — {$company}" : " — {$name}");
+$to      = 'tti-web-request@triton.net';
+$subject = "[tti-nvr] NVR Quote Request" . ($company !== '' ? " — {$company}" : " — {$name}");
 
 $headers  = "From: Triton Web Form <noreply@triton.net>\r\n";
 $headers .= "Reply-To: {$name} <{$email}>\r\n";

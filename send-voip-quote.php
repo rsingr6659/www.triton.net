@@ -66,8 +66,8 @@ $body .= "{$sep}\r\n";
 $body .= "Submitted: " . date('Y-m-d H:i:s T') . "\r\n";
 $body .= "Reply directly to this email to reach the requester.\r\n";
 
-$to      = 'voip@triton.net';
-$subject = "VoIP Quote Request" . ($company !== '' ? " — {$company}" : " — {$name}");
+$to      = 'tti-web-request@triton.net';
+$subject = "[tti-voip] VoIP Quote Request" . ($company !== '' ? " — {$company}" : " — {$name}");
 $headers  = "From: Triton Web Form <noreply@triton.net>\r\n";
 $headers .= "Reply-To: {$name} <{$email}>\r\n";
 $headers .= "X-Mailer: Triton-Web/1.0\r\n";
