@@ -1,0 +1,11 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home-550/tripop/public_html/gitsite/
+    - /bin/cp -f index.html $DEPLOYPATH
+    - /bin/cp -f about.html $DEPLOYPATH
+    - /bin/cp -f paybill.html $DEPLOYPATH
+    - /bin/cp -f policy.html $DEPLOYPATH
+    - /bin/cp -f tti-ga.html $DEPLOYPATH
+    - /bin/cp -f tti-nvr.html $DEPLOYPATH
+    - /bin/cp -f send-quote.php $DEPLOYPATH
