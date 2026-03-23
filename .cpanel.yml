@@ -9,3 +9,5 @@ deployment:
     - /bin/cp -f tti-ga.html $DEPLOYPATH
     - /bin/cp -f tti-nvr.html $DEPLOYPATH
     - /bin/cp -f send-quote.php $DEPLOYPATH
+    - /bin/cp -f tti-voip.html $DEPLOYPATH
+    - /bin/cp -f send-voip-quote.php $DEPLOYPATH

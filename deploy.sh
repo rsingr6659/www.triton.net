@@ -25,7 +25,7 @@ GIT_OUTPUT=$(HOME="$HOME" git pull 2>&1)
 echo "Git pull: $GIT_OUTPUT" >> "$LOG_FILE"
 
 # Copy all site files to public_html
-FILES="index.html about.html paybill.html policy.html tti-ga.html tti-nvr.html send-quote.php deploy.php"
+FILES="index.html about.html paybill.html policy.html tti-ga.html tti-nvr.html tti-voip.html send-quote.php send-voip-quote.php deploy.php"
 
 for FILE in $FILES; do
     if [ -f "$REPO_PATH/$FILE" ]; then
