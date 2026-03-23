@@ -49,7 +49,23 @@ if ($event !== 'push') {
 // ── Run git pull ───────────────────────────────────────────────────────────────
 $home = '/home-550/tripop';
 $cmd  = "HOME={$home} git -C " . escapeshellarg(REPO_PATH) . " pull 2>&1";
-$output = shell_exec($cmd);
+$output = '';
+
+if (function_exists('exec')) {
+    exec($cmd, $lines);
+    $output = implode("\n", $lines);
+} elseif (function_exists('proc_open')) {
+    $desc = [1 => ['pipe','w'], 2 => ['pipe','w']];
+    $proc = proc_open($cmd, $desc, $pipes);
+    if (is_resource($proc)) {
+        $output = stream_get_contents($pipes[1]) . stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+        proc_close($proc);
+    }
+} else {
+    $output = 'ERROR: exec() and proc_open() are both disabled in PHP.';
+}
 
 // ── Copy files to public_html ──────────────────────────────────────────────────
 $copied = [];
