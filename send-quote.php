@@ -49,6 +49,7 @@ $hasSystemStr = val(['yes'=>'Yes — has an existing system','no'=>'No — start
 $recModeStr   = val(['continuous'=>'Continuous 24/7','motion'=>'Motion / AI detection','both'=>'Both'][$recMode] ?? $recMode);
 $timeframeStr = val(['now'=>'Ready now','1mo'=>'Within 1 month','6mo'=>'Within 6 months','undecided'=>'Still deciding'][$timeframe] ?? $timeframe);
 
+date_default_timezone_set('America/New_York');
 $submitted = date('l, F j, Y \a\t g:i A T');
 
 // ── Plain-text fallback ────────────────────────────────────────────────────────
@@ -74,7 +75,7 @@ $plain .= ($notes !== '' ? $notes : 'None') . "\r\n\r\n";
 $plain .= "{$sep}\r\n";
 $plain .= "Submitted: {$submitted}\r\n";
 $plain .= "Reply to this email to reach the requester directly.\r\n";
-$plain .= "Triton Technologies, Inc. | triton.net | (616) 247-1100\r\n";
+$plain .= "Triton Technologies, Inc. | triton.net | 616 980 9800\r\n";
 
 // ── HTML email ─────────────────────────────────────────────────────────────────
 function row($label, $value) {
@@ -129,14 +130,6 @@ $html = '<!DOCTYPE html>
           </td>
         </tr>
 
-        <!-- INTRO -->
-        <tr>
-          <td style="padding:20px 28px 8px;background:#fff;">
-            <p style="margin:0;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;font-size:14px;color:#444;line-height:1.6;">
-              A new NVR quote request was submitted via the Triton website. Reply to this email to contact the requester directly.
-            </p>
-          </td>
-        </tr>
 
         <!-- SECTIONS -->
         <tr><td style="padding:8px 28px 4px;">
@@ -171,7 +164,7 @@ $html = '<!DOCTYPE html>
               <tr>
                 <td style="font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;font-size:11px;color:rgba(255,255,255,.5);">
                   Submitted: ' . $submitted . '<br>
-                  Triton Technologies, Inc. &nbsp;|&nbsp; triton.net &nbsp;|&nbsp; (616) 247-1100
+                  Triton Technologies, Inc. &nbsp;|&nbsp; triton.net &nbsp;|&nbsp; 616 980 9800
                 </td>
                 <td align="right" style="font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;font-size:10px;color:rgba(255,255,255,.3);">
                   Source: tti-nvr
