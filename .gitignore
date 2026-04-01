@@ -1,0 +1,6 @@
+.DS_Store
+Thumbs.db
+.vscode/
+*.sublime-workspace
+*.log
+node_modules/
