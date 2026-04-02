@@ -1,0 +1,18 @@
+/* ==UserStyle==
+@name        Triton Frigate Clean View
+@namespace   triton.net
+@version     1.1.0
+@updateURL   https://www.triton.net/frigate-clean-view.user.css
+@description Removes the Frigate timeline/filmstrip for a cleaner live view.
+@author      Triton Technologies, Inc.
+==/UserStyle== */
+
+/* Matches Frigate running on common local network addresses and ports */
+@-moz-document regexp("https?://(localhost|192\\.168\\.[0-9]+\\.[0-9]+|10\\.[0-9]+\\.[0-9]+\\.[0-9]+|172\\.(1[6-9]|2[0-9]|3[01])\\.[0-9]+\\.[0-9]+)(:(5000|8971))?(/.*)?") {
+
+  /* Hide Frigate Timeline/Filmstrip */
+  div[class*="flex items-center gap-2 px-1"] {
+    display: none !important;
+  }
+
+}

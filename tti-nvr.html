@@ -710,10 +710,10 @@ footer{background:var(--navy-dk);padding:40px 0;}
           <span class="prop">@updateURL</span> <span class="val">https://www.triton.net/frigate-clean-view.user.css</span><br>
           <span class="prop">@description</span> <span class="val">Removes filmstrip and optimizes Frigate layout.</span><br>
           <span class="comment">==/UserStyle== */</span><br><br>
-          <span class="comment">/* Targets your local Frigate instance */</span><br>
+          <span class="comment">/* Matches any local network Frigate instance */</span><br>
           <span class="prop">@-moz-document</span> url-prefix(<span class="val">"http://your-frigate-ip:5000"</span>) {<br>
-          &nbsp;&nbsp;<span class="comment">/* Hide the filmstrip */</span><br>
-          &nbsp;&nbsp;<span class="val">.filmstrip, [class*="Filmstrip"]</span> {<br>
+          &nbsp;&nbsp;<span class="comment">/* Hide Frigate Timeline/Filmstrip */</span><br>
+          &nbsp;&nbsp;<span class="val">div[class*="flex items-center gap-2 px-1"]</span> {<br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">display</span>: <span class="val">none !important</span>;<br>
           &nbsp;&nbsp;}<br>
           }
@@ -888,7 +888,8 @@ function copyCSS() {
 ==/UserStyle== */
 
 @-moz-document url-prefix("http://your-frigate-ip:5000") {
-  .filmstrip, [class*="Filmstrip"] {
+  /* Hide Frigate Timeline/Filmstrip */
+  div[class*="flex items-center gap-2 px-1"] {
     display: none !important;
   }
 }`;
