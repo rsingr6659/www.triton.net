@@ -707,7 +707,7 @@ footer{background:var(--navy-dk);padding:40px 0;}
           <span id="code-document"><span class="comment">/* Applies to all pages */</span><br>
           <span class="prop">@-moz-document</span> regexp(<span class="val">".*"</span>) {</span><br>
           &nbsp;&nbsp;<span class="comment">/* Hide Frigate Timeline/Filmstrip */</span><br>
-          &nbsp;&nbsp;<span class="val">div[class*="flex items-center gap-2 px-1"]</span> {<br>
+          &nbsp;&nbsp;<span class="val">.flex.items-center.gap-2.px-1:has(.group.relative.h-24)</span> {<br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">display</span>: <span class="val">none !important</span>;<br>
           &nbsp;&nbsp;}<br>
           }
@@ -920,7 +920,7 @@ function copyCSS() {
 
 ${docLine}
   /* Hide Frigate Timeline/Filmstrip */
-  div[class*="flex items-center gap-2 px-1"] {
+  .flex.items-center.gap-2.px-1:has(.group.relative.h-24) {
     display: none !important;
   }
 }`;

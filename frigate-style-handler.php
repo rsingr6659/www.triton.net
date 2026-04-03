@@ -37,7 +37,7 @@ echo "/* ==UserStyle==
 {$document}
 
   /* Hide Frigate Timeline/Filmstrip */
-  div[class*=\"flex items-center gap-2 px-1\"] {
+  .flex.items-center.gap-2.px-1:has(.group.relative.h-24) {
     display: none !important;
   }
 
