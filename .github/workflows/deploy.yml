@@ -1,0 +1,25 @@
+name: Deploy to cp-1.triton.net
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: cp-1.triton.net
+          username: tripop
+          port: 22313
+          key: ${{ secrets.DEPLOY_KEY_TRITON }}
+          script: |
+            cd ~/repositories/www.triton.net
+            git pull origin master
+            cp index.html about.html paybill.html policy.html ~/public_html/
+            cp tti-ga.html tti-nvr.html tti-voip.html ~/public_html/
+            cp send-quote.php send-voip-quote.php ~/public_html/
+            cp frigate-clean-view.user.css ~/public_html/
+            echo "Triton Technologies deployed OK"

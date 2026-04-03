@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home-550/tripop/public_html/gitsite/
+    - export DEPLOYPATH=/home-550/tripop/public_html/
     - /bin/cp -f index.html $DEPLOYPATH
     - /bin/cp -f about.html $DEPLOYPATH
     - /bin/cp -f paybill.html $DEPLOYPATH
