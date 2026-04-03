@@ -1,4 +1,4 @@
-name: Deploy to cp-1.triton.net
+name: Deploy to cpanel1.triton.net
 
 on:
   push:
