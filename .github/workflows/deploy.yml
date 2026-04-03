@@ -16,7 +16,7 @@ jobs:
           port: 22313
           key: ${{ secrets.DEPLOY_KEY_TRITON }}
           script: |
-            cd ~/repositories/www.triton.net
+            cd ~/repositories/triton-web
             git pull origin master
             cp index.html about.html paybill.html policy.html ~/public_html/www/
             cp tti-ga.html tti-nvr.html tti-voip.html ~/public_html/www/
