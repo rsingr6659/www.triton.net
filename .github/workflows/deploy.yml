@@ -20,6 +20,6 @@ jobs:
             git pull origin master
             cp index.html about.html paybill.html policy.html ~/public_html/www/
             cp tti-ga.html tti-nvr.html tti-voip.html ~/public_html/www/
-            cp send-quote.php send-voip-quote.php ~/public_html/www/
-            cp frigate-clean-view.user.css ~/public_html/www/
+            cp send-quote.php send-voip-quote.php frigate-style-handler.php ~/public_html/www/
+            cp frigate-clean-view.user.css .htaccess ~/public_html/www/
             echo "Triton Technologies deployed OK"

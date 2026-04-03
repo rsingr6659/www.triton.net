@@ -1,0 +1,4 @@
+RewriteEngine On
+
+# Route frigate-clean-view.user.css to PHP handler (preserves query string for ?nvr= param)
+RewriteRule ^frigate-clean-view\.user\.css$ frigate-style-handler.php [L,QSA]

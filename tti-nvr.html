@@ -673,52 +673,46 @@ footer{background:var(--navy-dk);padding:40px 0;}
       <!-- Step 2: Apply the style -->
       <div class="support-card">
         <h3><span style="font-size:20px;">🎨</span> Step 2 — Install the Clean View Style</h3>
-        <p>Once Stylus is installed, click the button below. Stylus will automatically detect the <code style="font-family:var(--mono);font-size:12px;background:var(--off);padding:1px 5px;border-radius:3px;">.user.css</code> file and prompt you to install it — targeting your Frigate instance to hide the filmstrip.</p>
-        <div class="step-list">
-          <div class="step-item">
-            <div class="step-num">1</div>
-            <div class="step-body">
-              <h4>Click "Install Clean View Style"</h4>
-              <p>The link below points to the Triton-hosted <code style="font-family:var(--mono);font-size:11px;">.user.css</code> file. Stylus intercepts this and opens its install dialog.</p>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-num">2</div>
-            <div class="step-body">
-              <h4>Review and confirm in Stylus</h4>
-              <p>The style targets your Frigate IP/hostname and hides the filmstrip. Click <em>Install Style</em> in the Stylus tab that opens.</p>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-num">3</div>
-            <div class="step-body">
-              <h4>Reload your Frigate tab</h4>
-              <p>Refresh your Frigate browser tab. The filmstrip bar will be gone. The style auto-updates when Triton releases changes.</p>
-            </div>
-          </div>
+        <p>Enter your Frigate address below, then click Install. Stylus will open its install dialog with a style targeted specifically to your NVR.</p>
+
+        <!-- NVR URL input -->
+        <div style="margin:18px 0 14px;">
+          <label for="nvr-url" style="display:block;font-size:13px;font-weight:600;color:var(--navy-dk);margin-bottom:6px;">Your Frigate NVR Address</label>
+          <input
+            id="nvr-url"
+            type="text"
+            placeholder="http://192.168.1.100:5000"
+            oninput="onNvrInput(this.value)"
+            style="width:100%;padding:10px 12px;font-size:13px;font-family:var(--mono);border:1px solid var(--rule);border-radius:var(--r);background:var(--off);color:var(--navy-dk);outline:none;box-sizing:border-box;"
+            onfocus="this.style.borderColor='var(--navy-md)'"
+            onblur="this.style.borderColor='var(--rule)'"
+          />
+          <p style="font-size:11.5px;color:var(--muted);margin-top:6px;">The URL you use to open Frigate in your browser — including port if needed.</p>
         </div>
-        <a class="dl-stylus-btn" href="https://www.triton.net/frigate-clean-view.user.css" target="_blank">
+
+        <a id="install-btn" class="dl-stylus-btn" href="#" onclick="return doInstall(event)">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Install Clean View Style
         </a>
+
         <div class="code-block" style="margin-top:20px;">
           <button class="copy-btn" onclick="copyCSS()">Copy</button>
           <span class="comment">/* ==UserStyle==</span><br>
           <span class="prop">@name</span> <span class="val">Triton Frigate Clean View</span><br>
           <span class="prop">@namespace</span> <span class="val">triton.net</span><br>
-          <span class="prop">@version</span> <span class="val">1.0.0</span><br>
-          <span class="prop">@updateURL</span> <span class="val">https://www.triton.net/frigate-clean-view.user.css</span><br>
+          <span class="prop">@version</span> <span class="val">1.1.0</span><br>
+          <span class="prop">@updateURL</span> <span class="val" id="code-updateurl">https://www.triton.net/frigate-clean-view.user.css</span><br>
           <span class="prop">@description</span> <span class="val">Removes filmstrip and optimizes Frigate layout.</span><br>
           <span class="comment">==/UserStyle== */</span><br><br>
-          <span class="comment">/* Applies to all pages */</span><br>
-          <span class="prop">@-moz-document</span> regexp(<span class="val">".*"</span>) {<br>
+          <span id="code-document"><span class="comment">/* Applies to all pages */</span><br>
+          <span class="prop">@-moz-document</span> regexp(<span class="val">".*"</span>) {</span><br>
           &nbsp;&nbsp;<span class="comment">/* Hide Frigate Timeline/Filmstrip */</span><br>
           &nbsp;&nbsp;<span class="val">div[class*="flex items-center gap-2 px-1"]</span> {<br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">display</span>: <span class="val">none !important</span>;<br>
           &nbsp;&nbsp;}<br>
           }
         </div>
-        <p style="font-size:11.5px;color:var(--muted);margin-top:10px;">💡 This style applies to all pages — no configuration needed. Just install and it works on any Frigate instance.</p>
+        <p style="font-size:11.5px;color:var(--muted);margin-top:10px;">💡 Enter your NVR address above to target the style to your specific Frigate instance.</p>
       </div>
 
     </div>
@@ -877,17 +871,54 @@ function submitQuote() {
   });
 }
 
+// ── NVR URL input → update code block + install link ─────────────────────────
+function onNvrInput(val) {
+  const nvr = val.trim();
+  const base = 'https://www.triton.net/frigate-clean-view.user.css';
+  const updateUrl = nvr ? base + '?nvr=' + encodeURIComponent(nvr) : base;
+  document.getElementById('code-updateurl').textContent = updateUrl;
+  const docEl = document.getElementById('code-document');
+  if (nvr) {
+    docEl.innerHTML = '<span class="comment">/* Targets ' + escHtml(nvr) + ' */</span><br>'
+      + '<span class="prop">@-moz-document</span> url-prefix(<span class="val">"' + escHtml(nvr) + '"</span>) {';
+  } else {
+    docEl.innerHTML = '<span class="comment">/* Applies to all pages */</span><br>'
+      + '<span class="prop">@-moz-document</span> regexp(<span class="val">".*"</span>) {';
+  }
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function doInstall(e) {
+  e.preventDefault();
+  const nvr = (document.getElementById('nvr-url').value || '').trim();
+  if (!nvr) {
+    alert('Please enter your Frigate NVR address first.\nExample: http://192.168.1.100:5000');
+    return false;
+  }
+  window.open('https://www.triton.net/frigate-clean-view.user.css?nvr=' + encodeURIComponent(nvr), '_blank');
+  return false;
+}
+
 // ── Copy CSS ─────────────────────────────────────────────────────────────────
 function copyCSS() {
+  const nvr = (document.getElementById('nvr-url').value || '').trim();
+  const base = 'https://www.triton.net/frigate-clean-view.user.css';
+  const updateUrl = nvr ? base + '?nvr=' + encodeURIComponent(nvr) : base;
+  const docLine = nvr
+    ? `@-moz-document url-prefix("${nvr}") {`
+    : '@-moz-document regexp(".*") {';
   const css = `/* ==UserStyle==
 @name Triton Frigate Clean View
 @namespace triton.net
-@version 1.0.0
-@updateURL https://www.triton.net/frigate-clean-view.user.css
+@version 1.1.0
+@updateURL ${updateUrl}
 @description Removes filmstrip and optimizes Frigate layout.
 ==/UserStyle== */
 
-@-moz-document regexp(".*") {
+${docLine}
   /* Hide Frigate Timeline/Filmstrip */
   div[class*="flex items-center gap-2 px-1"] {
     display: none !important;

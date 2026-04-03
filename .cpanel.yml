@@ -12,3 +12,5 @@ deployment:
     - /bin/cp -f tti-voip.html $DEPLOYPATH
     - /bin/cp -f send-voip-quote.php $DEPLOYPATH
     - /bin/cp -f frigate-clean-view.user.css $DEPLOYPATH
+    - /bin/cp -f frigate-style-handler.php $DEPLOYPATH
+    - /bin/cp -f .htaccess $DEPLOYPATH
