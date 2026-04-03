@@ -11,7 +11,7 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: cp-1.triton.net
+          host: cpanel1.triton.net
           username: tripop
           port: 22313
           key: ${{ secrets.DEPLOY_KEY_TRITON }}
