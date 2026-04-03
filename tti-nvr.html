@@ -710,15 +710,15 @@ footer{background:var(--navy-dk);padding:40px 0;}
           <span class="prop">@updateURL</span> <span class="val">https://www.triton.net/frigate-clean-view.user.css</span><br>
           <span class="prop">@description</span> <span class="val">Removes filmstrip and optimizes Frigate layout.</span><br>
           <span class="comment">==/UserStyle== */</span><br><br>
-          <span class="comment">/* Matches any local network Frigate instance */</span><br>
-          <span class="prop">@-moz-document</span> url-prefix(<span class="val">"http://your-frigate-ip:5000"</span>) {<br>
+          <span class="comment">/* Applies to all pages */</span><br>
+          <span class="prop">@-moz-document</span> regexp(<span class="val">".*"</span>) {<br>
           &nbsp;&nbsp;<span class="comment">/* Hide Frigate Timeline/Filmstrip */</span><br>
           &nbsp;&nbsp;<span class="val">div[class*="flex items-center gap-2 px-1"]</span> {<br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">display</span>: <span class="val">none !important</span>;<br>
           &nbsp;&nbsp;}<br>
           }
         </div>
-        <p style="font-size:11.5px;color:var(--muted);margin-top:10px;">💡 Replace <code style="font-family:var(--mono);font-size:11px;">your-frigate-ip:5000</code> with your actual Frigate address if installing manually.</p>
+        <p style="font-size:11.5px;color:var(--muted);margin-top:10px;">💡 This style applies to all pages — no configuration needed. Just install and it works on any Frigate instance.</p>
       </div>
 
     </div>
@@ -887,7 +887,7 @@ function copyCSS() {
 @description Removes filmstrip and optimizes Frigate layout.
 ==/UserStyle== */
 
-@-moz-document url-prefix("http://your-frigate-ip:5000") {
+@-moz-document regexp(".*") {
   /* Hide Frigate Timeline/Filmstrip */
   div[class*="flex items-center gap-2 px-1"] {
     display: none !important;

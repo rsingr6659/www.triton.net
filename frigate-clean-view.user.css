@@ -7,8 +7,8 @@
 @author      Triton Technologies, Inc.
 ==/UserStyle== */
 
-/* Matches Frigate running on common local network addresses and ports */
-@-moz-document regexp("https?://(localhost|192\\.168\\.[0-9]+\\.[0-9]+|10\\.[0-9]+\\.[0-9]+\\.[0-9]+|172\\.(1[6-9]|2[0-9]|3[01])\\.[0-9]+\\.[0-9]+)(:(5000|8971))?(/.*)?") {
+/* Applies to all pages */
+@-moz-document regexp(".*") {
 
   /* Hide Frigate Timeline/Filmstrip */
   div[class*="flex items-center gap-2 px-1"] {
