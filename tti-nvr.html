@@ -701,7 +701,7 @@ footer{background:var(--navy-dk);padding:40px 0;}
           <span class="prop">@name</span> <span class="val">Triton Frigate Clean View</span><br>
           <span class="prop">@namespace</span> <span class="val">triton.net</span><br>
           <span class="prop">@version</span> <span class="val">1.1.0</span><br>
-          <span class="prop">@updateURL</span> <span class="val" id="code-updateurl">https://www.triton.net/frigate-clean-view.user.css</span><br>
+          <span class="prop">@updateURL</span> <span class="val" id="code-updateurl">https://www.triton.net/www/frigate-style-handler.php</span><br>
           <span class="prop">@description</span> <span class="val">Removes filmstrip and optimizes Frigate layout.</span><br>
           <span class="comment">==/UserStyle== */</span><br><br>
           <span id="code-document"><span class="comment">/* Applies to all pages */</span><br>
@@ -874,7 +874,7 @@ function submitQuote() {
 // ── NVR URL input → update code block + install link ─────────────────────────
 function onNvrInput(val) {
   const nvr = val.trim();
-  const base = 'https://www.triton.net/frigate-clean-view.user.css';
+  const base = 'https://www.triton.net/www/frigate-style-handler.php';
   const updateUrl = nvr ? base + '?nvr=' + encodeURIComponent(nvr) : base;
   document.getElementById('code-updateurl').textContent = updateUrl;
   const docEl = document.getElementById('code-document');
@@ -898,14 +898,14 @@ function doInstall(e) {
     alert('Please enter your Frigate NVR address first.\nExample: http://192.168.1.100:5000');
     return false;
   }
-  window.open('https://www.triton.net/frigate-clean-view.user.css?nvr=' + encodeURIComponent(nvr), '_blank');
+  window.open('https://www.triton.net/www/frigate-style-handler.php?nvr=' + encodeURIComponent(nvr), '_blank');
   return false;
 }
 
 // ── Copy CSS ─────────────────────────────────────────────────────────────────
 function copyCSS() {
   const nvr = (document.getElementById('nvr-url').value || '').trim();
-  const base = 'https://www.triton.net/frigate-clean-view.user.css';
+  const base = 'https://www.triton.net/www/frigate-style-handler.php';
   const updateUrl = nvr ? base + '?nvr=' + encodeURIComponent(nvr) : base;
   const docLine = nvr
     ? `@-moz-document url-prefix("${nvr}") {`

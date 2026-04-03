@@ -18,7 +18,7 @@ if (!empty($nvr) && !filter_var($nvr, FILTER_VALIDATE_URL)) {
 }
 
 $nvr_safe   = htmlspecialchars($nvr, ENT_QUOTES, 'UTF-8');
-$update_url = 'https://www.triton.net/frigate-clean-view.user.css'
+$update_url = 'https://www.triton.net/www/frigate-style-handler.php'
             . (!empty($nvr) ? '?nvr=' . urlencode($nvr) : '');
 
 $document = !empty($nvr)
