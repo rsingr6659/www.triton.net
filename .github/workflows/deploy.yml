@@ -18,8 +18,8 @@ jobs:
           script: |
             cd ~/repositories/www.triton.net
             git pull origin master
-            cp index.html about.html paybill.html policy.html ~/public_html/
-            cp tti-ga.html tti-nvr.html tti-voip.html ~/public_html/
-            cp send-quote.php send-voip-quote.php ~/public_html/
-            cp frigate-clean-view.user.css ~/public_html/
+            cp index.html about.html paybill.html policy.html ~/public_html/www/
+            cp tti-ga.html tti-nvr.html tti-voip.html ~/public_html/www/
+            cp send-quote.php send-voip-quote.php ~/public_html/www/
+            cp frigate-clean-view.user.css ~/public_html/www/
             echo "Triton Technologies deployed OK"
