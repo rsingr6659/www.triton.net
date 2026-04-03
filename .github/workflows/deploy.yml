@@ -8,18 +8,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via SCP
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: cpanel1.triton.net
           username: tripop
           port: 22313
           key: ${{ secrets.DEPLOY_KEY_TRITON }}
-          script: |
-            cd ~/repositories/triton-web
-            git pull origin master
-            cp index.html about.html paybill.html policy.html ~/public_html/www/
-            cp tti-ga.html tti-nvr.html tti-voip.html ~/public_html/www/
-            cp send-quote.php send-voip-quote.php frigate-style-handler.php ~/public_html/www/
-            cp frigate-clean-view.user.css .htaccess ~/public_html/www/
-            echo "Triton Technologies deployed OK"
+          source: "index.html,about.html,paybill.html,policy.html,tti-ga.html,tti-nvr.html,tti-voip.html,send-quote.php,send-voip-quote.php,frigate-style-handler.php,frigate-clean-view.user.css,.htaccess"
+          target: "~/public_html/www/"
